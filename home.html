@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyHargon | Professional Dreamer</title>
+    <link rel="icon" href="assets/LH02.png" type="image/png">
+    <link rel="stylesheet" href="assets/styles.css">
+    <style>
+        .sleep-meter {
+            width: 200px;
+            height: 30px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 15px;
+            margin: 1rem auto;
+            position: relative;
+            overflow: hidden;
+        }
+        .sleep-progress {
+            width: 95%;
+            height: 100%;
+            background: linear-gradient(90deg, #4a4a8a, #6a6aaa);
+            border-radius: 15px;
+            animation: sleepGlow 2s infinite alternate;
+        }
+        @keyframes sleepGlow {
+            from { opacity: 0.8; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="interactive-bg" id="interactiveBg"></div>
+    
+    <nav class="nav-container">
+        <img src="assets/LH01.png" alt="Logo" class="logo">
+        <div class="nav-links">
+            <a href="https://skyhargon.github.io/LunaVortex-Web/about.html">Home</a>
+            <a href="https://steamcommunity.com/id/SkyHargon/">Wake Me Up</a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="interactive-card">
+            <h1>Professional Sleep Engineer 😴</h1>
+            <div class="sleep-meter">
+                <div class="sleep-progress"></div>
+            </div>
+            <p>Current status: Catching Z's in 5D hyperspace</p>
+            
+            <button class="cta-button" onclick="toggleAchievements()">
+                Show Superpowers
+            </button>
+            
+            <div class="expanded-content" id="achievements">
+                <h2>Certified Skills</h2>
+                <ul>
+                    <li>🏆 World Record: 16hr Continuous Sleep</li>
+                    <li>💤 Pillow Whisperer</li>
+                    <li>🛌 Bed-Making Artistry (Level: Never)</li>
+                    <li>☕️ Coffee Resistance: MAX</li>
+                </ul>
+                
+                <h2>Life Philosophy</h2>
+                <p>"I wanted to learn Python... <br>
+                But then I took a nap."</p>
+                
+                <h2>Contact Protocol</h2>
+                <p>📧 Email: skyhargon@outlook.com<br>
+                📱 WeChat: SkyHargon<br>
+                ⚠️ Warning: May respond after 3 sleep cycles</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // 复用原有粒子系统
+        function createParticles() {
+            const bg = document.getElementById('interactiveBg');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                bg.appendChild(particle);
+            }
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            const particles = document.querySelectorAll('.particle');
+            particles.forEach(particle => {
+                const x = e.clientX;
+                const y = e.clientY;
+                const rect = particle.getBoundingClientRect();
+                const dx = x - rect.left;
+                const dy = y - rect.top;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < 100) {
+                    const angle = Math.atan2(dy, dx);
+                    const force = (100 - distance) / 10;
+                    particle.style.transform = `translate(${Math.cos(angle) * force}px, ${Math.sin(angle) * force}px)`;
+                }
+            });
+        });
+
+        function toggleAchievements() {
+            document.getElementById('achievements').classList.toggle('active');
+        }
+
+        createParticles();
+    </script>
+</body>
+</html>
